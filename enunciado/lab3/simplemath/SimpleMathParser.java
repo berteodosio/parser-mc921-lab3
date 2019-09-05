@@ -16,7 +16,7 @@ public class SimpleMathParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		VAR=1, ID=2, EQ=3, NUM=4, SEMICOLON=5;
+		VAR=1, ID=2, EQ=3, NUM=4, SEMICOLON=5, WHITESPACE=6, ERROR_CHAR=7;
 	public static final int
 		RULE_root = 0;
 	private static String[] makeRuleNames() {
@@ -34,7 +34,7 @@ public class SimpleMathParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "VAR", "ID", "EQ", "NUM", "SEMICOLON"
+			null, "VAR", "ID", "EQ", "NUM", "SEMICOLON", "WHITESPACE", "ERROR_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -135,7 +135,7 @@ public class SimpleMathParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\7\13\4\2\t\2\3\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\t\13\4\2\t\2\3\2"+
 		"\3\2\3\2\3\2\3\2\3\2\3\2\2\2\3\2\2\2\2\t\2\4\3\2\2\2\4\5\7\3\2\2\5\6\7"+
 		"\4\2\2\6\7\7\5\2\2\7\b\7\6\2\2\b\t\7\7\2\2\t\3\3\2\2\2\2";
 	public static final ATN _ATN =
