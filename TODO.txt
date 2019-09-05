@@ -1,6 +1,8 @@
 - Criar a gramática .g4
 - Compilar a gramática em código Java
 - Implementar uma herança de uma das classes geradas.
+- Implementar um visitor que gere os mesmos resultados que os apresentados
 - Implementar um programa que chama o parser gerado pelo antlr e a herança criada
+
 - “Compilar” o código java.
 - Executar o parser passando códigos exemplos por parâmetro.
