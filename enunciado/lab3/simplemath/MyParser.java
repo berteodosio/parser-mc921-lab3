@@ -11,7 +11,7 @@ class MyParser {
         // create a lexer that feeds off of input CharStream
         final SimpleMathLexer lexer = new SimpleMathLexer(input);
         // create a buffer of tokens pulled from the lexer
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        final CommonTokenStream tokens = new CommonTokenStream(lexer);
         // create a parser that feeds off the tokens buffer
         final SimpleMathParser parser = new SimpleMathParser(tokens);
         final ParseTree tree = parser.root(); // begin parsing at prog rule
