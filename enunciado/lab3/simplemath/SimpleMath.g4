@@ -33,12 +33,11 @@ WHITESPACE
 
 
 VAR         : 'var';
-ID          : [a-zA-Z_][a-zA-Z0-9_]*;
+FUNC        : 'func';
+
 EQ          : '=';
-NUM         : [0-9]+;
 SEMICOLON   : ';';
 
-FUNC    :   'func';
 LPAREN  :   '(';
 RPAREN  :   ')';
 ADD     :   '+';
@@ -46,5 +45,8 @@ MUL     :   '*';
 SUB     :   '-';
 COMMA   :   ',';
 DIV     :   '/';
+
+ID          : [a-zA-Z_][a-zA-Z0-9_]*;
+NUM         : [0-9]+;
 
 ERROR_CHAR : . ;

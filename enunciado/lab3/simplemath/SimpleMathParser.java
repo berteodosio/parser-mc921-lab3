@@ -16,8 +16,8 @@ public class SimpleMathParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		WHITESPACE=1, VAR=2, ID=3, EQ=4, NUM=5, SEMICOLON=6, FUNC=7, LPAREN=8, 
-		RPAREN=9, ADD=10, MUL=11, SUB=12, COMMA=13, DIV=14, ERROR_CHAR=15;
+		WHITESPACE=1, VAR=2, FUNC=3, EQ=4, SEMICOLON=5, LPAREN=6, RPAREN=7, ADD=8, 
+		MUL=9, SUB=10, COMMA=11, DIV=12, ID=13, NUM=14, ERROR_CHAR=15;
 	public static final int
 		RULE_root = 0, RULE_s = 1, RULE_var_declaration = 2, RULE_func_declaration = 3, 
 		RULE_expression = 4, RULE_expression_t = 5, RULE_expression_f = 6;
@@ -31,15 +31,15 @@ public class SimpleMathParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, "'var'", null, "'='", null, "';'", "'func'", "'('", "')'", 
-			"'+'", "'*'", "'-'", "','", "'/'"
+			null, null, "'var'", "'func'", "'='", "';'", "'('", "')'", "'+'", "'*'", 
+			"'-'", "','", "'/'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "WHITESPACE", "VAR", "ID", "EQ", "NUM", "SEMICOLON", "FUNC", "LPAREN", 
-			"RPAREN", "ADD", "MUL", "SUB", "COMMA", "DIV", "ERROR_CHAR"
+			null, "WHITESPACE", "VAR", "FUNC", "EQ", "SEMICOLON", "LPAREN", "RPAREN", 
+			"ADD", "MUL", "SUB", "COMMA", "DIV", "ID", "NUM", "ERROR_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -609,16 +609,16 @@ public class SimpleMathParser extends Parser {
 		"\b\2\4\n\f\t\2\4\6\b\n\f\16\2\2\2H\2\20\3\2\2\2\4\25\3\2\2\2\6\27\3\2"+
 		"\2\2\b\34\3\2\2\2\n#\3\2\2\2\f\61\3\2\2\2\16E\3\2\2\2\20\21\5\4\3\2\21"+
 		"\3\3\2\2\2\22\26\5\6\4\2\23\26\5\b\5\2\24\26\7\2\2\3\25\22\3\2\2\2\25"+
-		"\23\3\2\2\2\25\24\3\2\2\2\26\5\3\2\2\2\27\30\7\4\2\2\30\31\7\5\2\2\31"+
-		"\32\7\6\2\2\32\33\5\n\6\2\33\7\3\2\2\2\34\35\7\t\2\2\35\36\7\5\2\2\36"+
-		"\37\7\n\2\2\37 \7\5\2\2 !\7\13\2\2!\"\5\n\6\2\"\t\3\2\2\2#$\b\6\1\2$%"+
-		"\5\f\7\2%.\3\2\2\2&\'\f\5\2\2\'(\7\16\2\2(-\5\f\7\2)*\f\4\2\2*+\7\f\2"+
-		"\2+-\5\f\7\2,&\3\2\2\2,)\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\13\3"+
-		"\2\2\2\60.\3\2\2\2\61\62\b\7\1\2\62\63\5\16\b\2\63<\3\2\2\2\64\65\f\5"+
-		"\2\2\65\66\7\r\2\2\66;\5\16\b\2\678\f\4\2\289\7\20\2\29;\5\16\b\2:\64"+
-		"\3\2\2\2:\67\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\r\3\2\2\2><\3\2\2"+
-		"\2?F\7\5\2\2@F\7\7\2\2AB\7\n\2\2BC\5\n\6\2CD\7\13\2\2DF\3\2\2\2E?\3\2"+
-		"\2\2E@\3\2\2\2EA\3\2\2\2F\17\3\2\2\2\b\25,.:<E";
+		"\23\3\2\2\2\25\24\3\2\2\2\26\5\3\2\2\2\27\30\7\4\2\2\30\31\7\17\2\2\31"+
+		"\32\7\6\2\2\32\33\5\n\6\2\33\7\3\2\2\2\34\35\7\5\2\2\35\36\7\17\2\2\36"+
+		"\37\7\b\2\2\37 \7\17\2\2 !\7\t\2\2!\"\5\n\6\2\"\t\3\2\2\2#$\b\6\1\2$%"+
+		"\5\f\7\2%.\3\2\2\2&\'\f\5\2\2\'(\7\f\2\2(-\5\f\7\2)*\f\4\2\2*+\7\n\2\2"+
+		"+-\5\f\7\2,&\3\2\2\2,)\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\13\3\2"+
+		"\2\2\60.\3\2\2\2\61\62\b\7\1\2\62\63\5\16\b\2\63<\3\2\2\2\64\65\f\5\2"+
+		"\2\65\66\7\13\2\2\66;\5\16\b\2\678\f\4\2\289\7\16\2\29;\5\16\b\2:\64\3"+
+		"\2\2\2:\67\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\r\3\2\2\2><\3\2\2\2"+
+		"?F\7\17\2\2@F\7\20\2\2AB\7\b\2\2BC\5\n\6\2CD\7\t\2\2DF\3\2\2\2E?\3\2\2"+
+		"\2E@\3\2\2\2EA\3\2\2\2F\17\3\2\2\2\b\25,.:<E";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
