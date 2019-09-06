@@ -17,7 +17,7 @@ public class SimpleMathLexer extends Lexer {
 		new PredictionContextCache();
 	public static final int
 		WHITESPACE=1, VAR=2, ID=3, EQ=4, NUM=5, SEMICOLON=6, FUNC=7, LPAREN=8, 
-		RPAREN=9, ADD=10, TIMES=11, SUB=12, COMMA=13, DIV=14, ERROR_CHAR=15;
+		RPAREN=9, ADD=10, MUL=11, SUB=12, COMMA=13, DIV=14, ERROR_CHAR=15;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -29,7 +29,7 @@ public class SimpleMathLexer extends Lexer {
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"WHITESPACE", "VAR", "ID", "EQ", "NUM", "SEMICOLON", "FUNC", "LPAREN", 
-			"RPAREN", "ADD", "TIMES", "SUB", "COMMA", "DIV", "ERROR_CHAR"
+			"RPAREN", "ADD", "MUL", "SUB", "COMMA", "DIV", "ERROR_CHAR"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -44,7 +44,7 @@ public class SimpleMathLexer extends Lexer {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "WHITESPACE", "VAR", "ID", "EQ", "NUM", "SEMICOLON", "FUNC", "LPAREN", 
-			"RPAREN", "ADD", "TIMES", "SUB", "COMMA", "DIV", "ERROR_CHAR"
+			"RPAREN", "ADD", "MUL", "SUB", "COMMA", "DIV", "ERROR_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();

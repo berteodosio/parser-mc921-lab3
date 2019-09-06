@@ -1,6 +1,6 @@
 grammar SimpleMath;
 
-root        : s EOF;
+root        : s;
 
 s           : var_declaration   # VarDeclaration
             | func_declaration  # FuncDeclaration
@@ -24,6 +24,7 @@ expression_t : expression_t MUL expression_f
 expression_f : ID
              | NUM
              | LPAREN expression RPAREN
+             ;
 
 
 WHITESPACE
