@@ -10,7 +10,7 @@ s           : s SEMICOLON s     # SSemicolonS
 
 var_declaration : VAR ID EQ expression;
 
-func_declaration : FUNC ID LPAREN func_param_list RPAREN expression;
+func_declaration : FUNC ID LPAREN func_param_list RPAREN expression;    // TODO: AFTER FUNC DECLARATION WRITE FUNC_BODY
 
 func_param_list : ID (COMMA ID)*;
 
@@ -24,7 +24,7 @@ expression_t : expression_t MUL expression_f
              | expression_f
              ;
 
-expression_f : ID
+expression_f : ID                           // TODO: expression_f also maybe a function invocation
              | NUM
              | LPAREN expression RPAREN
              ;
