@@ -23,19 +23,26 @@ public interface SimpleMathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarDeclaration(SimpleMathParser.VarDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FuncDeclaration}
-	 * labeled alternative in {@link SimpleMathParser#s}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFuncDeclaration(SimpleMathParser.FuncDeclarationContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code EndOfFile}
 	 * labeled alternative in {@link SimpleMathParser#s}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitEndOfFile(SimpleMathParser.EndOfFileContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SSemicolonS}
+	 * labeled alternative in {@link SimpleMathParser#s}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSSemicolonS(SimpleMathParser.SSemicolonSContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FuncDeclaration}
+	 * labeled alternative in {@link SimpleMathParser#s}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncDeclaration(SimpleMathParser.FuncDeclarationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SimpleMathParser#var_declaration}.
 	 * @param ctx the parse tree

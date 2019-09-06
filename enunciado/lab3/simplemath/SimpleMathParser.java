@@ -115,7 +115,7 @@ public class SimpleMathParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(14);
-			s();
+			s(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -160,6 +160,21 @@ public class SimpleMathParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class SSemicolonSContext extends SContext {
+		public List<SContext> s() {
+			return getRuleContexts(SContext.class);
+		}
+		public SContext s(int i) {
+			return getRuleContext(SContext.class,i);
+		}
+		public TerminalNode SEMICOLON() { return getToken(SimpleMathParser.SEMICOLON, 0); }
+		public SSemicolonSContext(SContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof SimpleMathVisitor ) return ((SimpleMathVisitor<? extends T>)visitor).visitSSemicolonS(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class FuncDeclarationContext extends SContext {
 		public Func_declarationContext func_declaration() {
 			return getRuleContext(Func_declarationContext.class,0);
@@ -173,38 +188,79 @@ public class SimpleMathParser extends Parser {
 	}
 
 	public final SContext s() throws RecognitionException {
-		SContext _localctx = new SContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_s);
+		return s(0);
+	}
+
+	private SContext s(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		SContext _localctx = new SContext(_ctx, _parentState);
+		SContext _prevctx = _localctx;
+		int _startState = 2;
+		enterRecursionRule(_localctx, 2, RULE_s, _p);
 		try {
-			setState(19);
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(20);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case VAR:
-				_localctx = new VarDeclarationContext(_localctx);
-				enterOuterAlt(_localctx, 1);
 				{
-				setState(16);
+				_localctx = new VarDeclarationContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
+				setState(17);
 				var_declaration();
 				}
 				break;
 			case FUNC:
-				_localctx = new FuncDeclarationContext(_localctx);
-				enterOuterAlt(_localctx, 2);
 				{
-				setState(17);
+				_localctx = new FuncDeclarationContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(18);
 				func_declaration();
 				}
 				break;
 			case EOF:
-				_localctx = new EndOfFileContext(_localctx);
-				enterOuterAlt(_localctx, 3);
 				{
-				setState(18);
+				_localctx = new EndOfFileContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(19);
 				match(EOF);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(27);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					{
+					_localctx = new SSemicolonSContext(new SContext(_parentctx, _parentState));
+					pushNewRecursionContext(_localctx, _startState, RULE_s);
+					setState(22);
+					if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+					setState(23);
+					match(SEMICOLON);
+					setState(24);
+					s(5);
+					}
+					} 
+				}
+				setState(29);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -213,7 +269,7 @@ public class SimpleMathParser extends Parser {
 			_errHandler.recover(this, re);
 		}
 		finally {
-			exitRule();
+			unrollRecursionContexts(_parentctx);
 		}
 		return _localctx;
 	}
@@ -242,13 +298,13 @@ public class SimpleMathParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(21);
+			setState(30);
 			match(VAR);
-			setState(22);
+			setState(31);
 			match(ID);
-			setState(23);
+			setState(32);
 			match(EQ);
-			setState(24);
+			setState(33);
 			expression(0);
 			}
 		}
@@ -291,17 +347,17 @@ public class SimpleMathParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(26);
+			setState(35);
 			match(FUNC);
-			setState(27);
+			setState(36);
 			match(ID);
-			setState(28);
+			setState(37);
 			match(LPAREN);
-			setState(29);
+			setState(38);
 			match(ID);
-			setState(30);
+			setState(39);
 			match(RPAREN);
-			setState(31);
+			setState(40);
 			expression(0);
 			}
 		}
@@ -352,30 +408,30 @@ public class SimpleMathParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(34);
+			setState(43);
 			expression_t(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(44);
+			setState(53);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(42);
+					setState(51);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExpressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(36);
+						setState(45);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(37);
+						setState(46);
 						match(SUB);
-						setState(38);
+						setState(47);
 						expression_t(0);
 						}
 						break;
@@ -383,20 +439,20 @@ public class SimpleMathParser extends Parser {
 						{
 						_localctx = new ExpressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(39);
+						setState(48);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(40);
+						setState(49);
 						match(ADD);
-						setState(41);
+						setState(50);
 						expression_t(0);
 						}
 						break;
 					}
 					} 
 				}
-				setState(46);
+				setState(55);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
 			}
 		}
@@ -447,30 +503,30 @@ public class SimpleMathParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(48);
+			setState(57);
 			expression_f();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(58);
+			setState(67);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(56);
+					setState(65);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 					case 1:
 						{
 						_localctx = new Expression_tContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expression_t);
-						setState(50);
+						setState(59);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(51);
+						setState(60);
 						match(MUL);
-						setState(52);
+						setState(61);
 						expression_f();
 						}
 						break;
@@ -478,20 +534,20 @@ public class SimpleMathParser extends Parser {
 						{
 						_localctx = new Expression_tContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expression_t);
-						setState(53);
+						setState(62);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(54);
+						setState(63);
 						match(DIV);
-						setState(55);
+						setState(64);
 						expression_f();
 						}
 						break;
 					}
 					} 
 				}
-				setState(60);
+				setState(69);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
 			}
 		}
@@ -529,31 +585,31 @@ public class SimpleMathParser extends Parser {
 		Expression_fContext _localctx = new Expression_fContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_expression_f);
 		try {
-			setState(67);
+			setState(76);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(61);
+				setState(70);
 				match(ID);
 				}
 				break;
 			case NUM:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(62);
+				setState(71);
 				match(NUM);
 				}
 				break;
 			case LPAREN:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(63);
+				setState(72);
 				match(LPAREN);
-				setState(64);
+				setState(73);
 				expression(0);
-				setState(65);
+				setState(74);
 				match(RPAREN);
 				}
 				break;
@@ -574,6 +630,8 @@ public class SimpleMathParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
+		case 1:
+			return s_sempred((SContext)_localctx, predIndex);
 		case 4:
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		case 5:
@@ -581,44 +639,53 @@ public class SimpleMathParser extends Parser {
 		}
 		return true;
 	}
-	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
+	private boolean s_sempred(SContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 3);
+			return precpred(_ctx, 4);
+		}
+		return true;
+	}
+	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
+		switch (predIndex) {
 		case 1:
+			return precpred(_ctx, 3);
+		case 2:
 			return precpred(_ctx, 2);
 		}
 		return true;
 	}
 	private boolean expression_t_sempred(Expression_tContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 2:
-			return precpred(_ctx, 3);
 		case 3:
+			return precpred(_ctx, 3);
+		case 4:
 			return precpred(_ctx, 2);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21H\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\3\3\3\3\3\5\3\26"+
-		"\n\3\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\7\6-\n\6\f\6\16\6\60\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3"+
-		"\7\3\7\3\7\7\7;\n\7\f\7\16\7>\13\7\3\b\3\b\3\b\3\b\3\b\3\b\5\bF\n\b\3"+
-		"\b\2\4\n\f\t\2\4\6\b\n\f\16\2\2\2H\2\20\3\2\2\2\4\25\3\2\2\2\6\27\3\2"+
-		"\2\2\b\34\3\2\2\2\n#\3\2\2\2\f\61\3\2\2\2\16E\3\2\2\2\20\21\5\4\3\2\21"+
-		"\3\3\2\2\2\22\26\5\6\4\2\23\26\5\b\5\2\24\26\7\2\2\3\25\22\3\2\2\2\25"+
-		"\23\3\2\2\2\25\24\3\2\2\2\26\5\3\2\2\2\27\30\7\4\2\2\30\31\7\17\2\2\31"+
-		"\32\7\6\2\2\32\33\5\n\6\2\33\7\3\2\2\2\34\35\7\5\2\2\35\36\7\17\2\2\36"+
-		"\37\7\b\2\2\37 \7\17\2\2 !\7\t\2\2!\"\5\n\6\2\"\t\3\2\2\2#$\b\6\1\2$%"+
-		"\5\f\7\2%.\3\2\2\2&\'\f\5\2\2\'(\7\f\2\2(-\5\f\7\2)*\f\4\2\2*+\7\n\2\2"+
-		"+-\5\f\7\2,&\3\2\2\2,)\3\2\2\2-\60\3\2\2\2.,\3\2\2\2./\3\2\2\2/\13\3\2"+
-		"\2\2\60.\3\2\2\2\61\62\b\7\1\2\62\63\5\16\b\2\63<\3\2\2\2\64\65\f\5\2"+
-		"\2\65\66\7\13\2\2\66;\5\16\b\2\678\f\4\2\289\7\16\2\29;\5\16\b\2:\64\3"+
-		"\2\2\2:\67\3\2\2\2;>\3\2\2\2<:\3\2\2\2<=\3\2\2\2=\r\3\2\2\2><\3\2\2\2"+
-		"?F\7\17\2\2@F\7\20\2\2AB\7\b\2\2BC\5\n\6\2CD\7\t\2\2DF\3\2\2\2E?\3\2\2"+
-		"\2E@\3\2\2\2EA\3\2\2\2F\17\3\2\2\2\b\25,.:<E";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\21Q\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\3\3\3\3\3\3\3\3\5\3"+
+		"\27\n\3\3\3\3\3\3\3\7\3\34\n\3\f\3\16\3\37\13\3\3\4\3\4\3\4\3\4\3\4\3"+
+		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\7\6\66"+
+		"\n\6\f\6\16\69\13\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\7\7D\n\7\f\7\16"+
+		"\7G\13\7\3\b\3\b\3\b\3\b\3\b\3\b\5\bO\n\b\3\b\2\5\4\n\f\t\2\4\6\b\n\f"+
+		"\16\2\2\2R\2\20\3\2\2\2\4\26\3\2\2\2\6 \3\2\2\2\b%\3\2\2\2\n,\3\2\2\2"+
+		"\f:\3\2\2\2\16N\3\2\2\2\20\21\5\4\3\2\21\3\3\2\2\2\22\23\b\3\1\2\23\27"+
+		"\5\6\4\2\24\27\5\b\5\2\25\27\7\2\2\3\26\22\3\2\2\2\26\24\3\2\2\2\26\25"+
+		"\3\2\2\2\27\35\3\2\2\2\30\31\f\6\2\2\31\32\7\7\2\2\32\34\5\4\3\7\33\30"+
+		"\3\2\2\2\34\37\3\2\2\2\35\33\3\2\2\2\35\36\3\2\2\2\36\5\3\2\2\2\37\35"+
+		"\3\2\2\2 !\7\4\2\2!\"\7\17\2\2\"#\7\6\2\2#$\5\n\6\2$\7\3\2\2\2%&\7\5\2"+
+		"\2&\'\7\17\2\2\'(\7\b\2\2()\7\17\2\2)*\7\t\2\2*+\5\n\6\2+\t\3\2\2\2,-"+
+		"\b\6\1\2-.\5\f\7\2.\67\3\2\2\2/\60\f\5\2\2\60\61\7\f\2\2\61\66\5\f\7\2"+
+		"\62\63\f\4\2\2\63\64\7\n\2\2\64\66\5\f\7\2\65/\3\2\2\2\65\62\3\2\2\2\66"+
+		"9\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28\13\3\2\2\29\67\3\2\2\2:;\b\7\1\2"+
+		";<\5\16\b\2<E\3\2\2\2=>\f\5\2\2>?\7\13\2\2?D\5\16\b\2@A\f\4\2\2AB\7\16"+
+		"\2\2BD\5\16\b\2C=\3\2\2\2C@\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2F\r\3"+
+		"\2\2\2GE\3\2\2\2HO\7\17\2\2IO\7\20\2\2JK\7\b\2\2KL\5\n\6\2LM\7\t\2\2M"+
+		"O\3\2\2\2NH\3\2\2\2NI\3\2\2\2NJ\3\2\2\2O\17\3\2\2\2\t\26\35\65\67CEN";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

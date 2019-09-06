@@ -2,7 +2,8 @@ grammar SimpleMath;
 
 root        : s;
 
-s           : var_declaration   # VarDeclaration
+s           : s SEMICOLON s     # SSemicolonS
+            | var_declaration   # VarDeclaration
             | func_declaration  # FuncDeclaration
             | EOF               # EndOfFile
             ;

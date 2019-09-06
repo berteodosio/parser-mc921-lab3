@@ -30,14 +30,21 @@ public class SimpleMathBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFuncDeclaration(SimpleMathParser.FuncDeclarationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEndOfFile(SimpleMathParser.EndOfFileContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEndOfFile(SimpleMathParser.EndOfFileContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSSemicolonS(SimpleMathParser.SSemicolonSContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFuncDeclaration(SimpleMathParser.FuncDeclarationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

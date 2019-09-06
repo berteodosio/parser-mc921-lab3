@@ -56,7 +56,7 @@ var d = (C(23, a) / B(32, a));"
 EXPRESSION_8="func _le_2func(a, b, c, d) ((a + b - c) * d);
 var _23 = _le_2func(1,2, 3);"
 
-EXPRESSION_IN_USE=${EXPRESSION_2}
+EXPRESSION_IN_USE=${EXPRESSION_3}
 
 #feeding a string and reading the tokens
 #echo "${EXPRESSION_IN_USE}" | java org.antlr.v4.gui.TestRig SimpleMath root -tokens
