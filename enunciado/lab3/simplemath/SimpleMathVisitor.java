@@ -56,6 +56,12 @@ public interface SimpleMathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunc_declaration(SimpleMathParser.Func_declarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SimpleMathParser#func_param_list}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc_param_list(SimpleMathParser.Func_param_listContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SimpleMathParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
