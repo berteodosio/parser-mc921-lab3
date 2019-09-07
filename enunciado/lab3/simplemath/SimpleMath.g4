@@ -18,9 +18,7 @@ func_body : expression;
 
 func_invocation : ID LPAREN func_invocation_param_list RPAREN;
 
-func_invocation_param_list : func_invocation_param
-                           | func_invocation_param (COMMA func_invocation_param)*
-                           ;
+func_invocation_param_list : func_invocation_param (COMMA func_invocation_param)*;
 
 func_invocation_param : ID
                       | NUM
