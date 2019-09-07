@@ -36,7 +36,7 @@ num_expression_t : num_expression_t MUL num_expression_f
                  | num_expression_f
                  ;
 
-num_expression_f : ID                           // TODO: expression_f also maybe a function invocation
+num_expression_f : ID
                  | NUM
                  | LPAREN num_expression RPAREN
                  | func_invocation
