@@ -5,7 +5,7 @@ import java.io.IOException;
 
 class MyParser {
 
-    private static final boolean IS_DEBUG = false;
+    private static final boolean IS_DEBUG = Boolean.valueOf(System.getenv("useExpressionFromCode"));
 
     private static final String EXPRESSION_5 = "var a = 0;\n" +
             "var b = 15;\n" +
@@ -19,6 +19,11 @@ class MyParser {
             "func D (B) B * A(e);\n" +
             "func E (g) g + A(g) * B(f, g);\n" +
             "func F (A) B + 32 * C(b);";
+
+    private static final String EXPRESSION_6 = "func a (a) (32 * a + 5) / 3;\n" +
+            "var a = 6;\n" +
+            "var b = a(5);\n" +
+            "func c(b) a + 10 * b;";
 
     public static void main(String args[]) throws Exception {
 //        println("[MAIN] Starting");
@@ -49,7 +54,7 @@ class MyParser {
 
     private static CharStream getCharStream() throws IOException {
         if (IS_DEBUG) {
-            return CharStreams.fromString(EXPRESSION_5);
+            return CharStreams.fromString(EXPRESSION_6);
         }
         return CharStreams.fromStream(System.in);
     }

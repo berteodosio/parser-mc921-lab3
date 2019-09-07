@@ -39,8 +39,12 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
     public Integer visitSVarDeclaration(final SimpleMathParser.SVarDeclarationContext ctx) {
         eraseCurrentDeclaredFunction();
         final String variableName = ctx.var_declaration().ID().getText();
-        assertSymbolNotDeclared(variableName);
-        declaredVariableIdentifiers.add(variableName);
+        final boolean symbolNotDeclaredPreviously = assertSymbolNotDeclared(variableName);
+
+        if (symbolNotDeclaredPreviously) {
+            declaredVariableIdentifiers.add(variableName);
+        }
+
         return super.visitSVarDeclaration(ctx);
     }
 
@@ -136,10 +140,21 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
         }
     }
 
-    private void assertSymbolNotDeclared(final String variableName) {
-        if (symbolAlreadyDeclared(variableName)) {
-            compilationLog.addSymbolAlreadyDeclaredMessage(variableName);
+    /**
+     * Checks if a symbol have been declared previously, either as a global var a global func
+     * and adds an error to the compilation log if the symbol have already been
+     * declared previously.
+     *
+     * @param symbol the symbol name to be checked
+     * @return true if symbol have not been declared previously and false otherwise
+     */
+    private boolean assertSymbolNotDeclared(final String symbol) {
+        if (symbolAlreadyDeclared(symbol)) {
+            compilationLog.addSymbolAlreadyDeclaredMessage(symbol);
+            return false;
         }
+
+        return true;
     }
 
     private boolean symbolAlreadyDeclared(final String variableName) {
