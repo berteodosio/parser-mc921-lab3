@@ -1,35 +1,13 @@
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
-
-import java.io.IOException;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 class MyParser {
 
-    private static final boolean IS_DEBUG = Boolean.valueOf(System.getenv("useExpressionFromCode"));
-
-    private static final String EXPRESSION_5 = "var a = 0;\n" +
-            "var b = 15;\n" +
-            "var c = d;\n" +
-            "var d = a(10);\n" +
-            "var e = d + 20;\n" +
-            "var f = a * b + 10 / c;\n" +
-            "func A (g) g + a * (2 + b);\n" +
-            "func B (g, a) g * a + (f - e + 5) / 2;\n" +
-            "func C (A) A - 3;\n" +
-            "func D (B) B * A(e);\n" +
-            "func E (g) g + A(g) * B(f, g);\n" +
-            "func F (A) B + 32 * C(b);";
-
-    private static final String EXPRESSION_6 = "func a (a) (32 * a + 5) / 3;\n" +
-            "var a = 6;\n" +
-            "var b = a(5);\n" +
-            "func c(b) a + 10 * b;";
-
     public static void main(String args[]) throws Exception {
-//        println("[MAIN] Starting");
-
         // create a CharStream that reads from standard input
-        final CharStream input = getCharStream();
+        final CharStream input = CharStreams.fromStream(System.in);
 
         // create a lexer that feeds off of input CharStream
         final SimpleMathLexer lexer = new SimpleMathLexer(input);
@@ -43,24 +21,17 @@ class MyParser {
         // begin parsing at prog rule
         final ParseTree tree = parser.root();
 
+        // creates visitor instance to visit parse tree and get compilation log
         final MyVisitor myVisitor = new MyVisitor();
+
+        // visits parse tree
         myVisitor.visit(tree);
 
+        // gets compilation log
         final String compilationLog = myVisitor.getCompilationLog();
+
+        // prints compilation log as a final result from the program
         System.out.print(compilationLog);
-
-//        println("[MAIN] Finishing");
-    }
-
-    private static CharStream getCharStream() throws IOException {
-        if (IS_DEBUG) {
-            return CharStreams.fromString(EXPRESSION_6);
-        }
-        return CharStreams.fromStream(System.in);
-    }
-
-    private static void println(final String string) {
-        System.out.println(string);
     }
 
 }
