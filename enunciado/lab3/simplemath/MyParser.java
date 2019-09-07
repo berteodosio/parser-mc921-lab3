@@ -7,6 +7,19 @@ class MyParser {
 
     private static final boolean IS_DEBUG = false;
 
+    private static final String EXPRESSION_5 = "var a = 0;\n" +
+            "var b = 15;\n" +
+            "var c = d;\n" +
+            "var d = a(10);\n" +
+            "var e = d + 20;\n" +
+            "var f = a * b + 10 / c;\n" +
+            "func A (g) g + a * (2 + b);\n" +
+            "func B (g, a) g * a + (f - e + 5) / 2;\n" +
+            "func C (A) A - 3;\n" +
+            "func D (B) B * A(e);\n" +
+            "func E (g) g + A(g) * B(f, g);\n" +
+            "func F (A) B + 32 * C(b);";
+
     public static void main(String args[]) throws Exception {
 //        println("[MAIN] Starting");
 
@@ -36,7 +49,7 @@ class MyParser {
 
     private static CharStream getCharStream() throws IOException {
         if (IS_DEBUG) {
-            return CharStreams.fromString("func a(x) 2 + x * 5;");
+            return CharStreams.fromString(EXPRESSION_5);
         }
         return CharStreams.fromStream(System.in);
     }

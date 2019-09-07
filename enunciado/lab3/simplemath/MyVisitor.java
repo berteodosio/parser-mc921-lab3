@@ -101,16 +101,16 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
     }
 
     private void assertDeclaredIdentifier(final String declaredIdentifier) {
-        if (!declaredVariableIdentifiers.contains(declaredIdentifier) && !declaredFunctionSetContainsId(declaredIdentifier)) {
-            if (isCurrentFunctionArgument(declaredIdentifier)) {
-                return;
-            }
+        if (!declaredVariableIdentifiers.contains(declaredIdentifier)
+                && !declaredFunctionSetContainsId(declaredIdentifier)
+                && !isCurrentFunctionArgument(declaredIdentifier)) {
 
             compilationLog.addSymbolUndeclaredMessage(declaredIdentifier);
             return;
         }
 
-        if (declaredFunctionSetContainsId(declaredIdentifier)) {
+        // allows already declared function names to be overwritten with parameter names
+        if (declaredFunctionSetContainsId(declaredIdentifier) && !isCurrentFunctionArgument(declaredIdentifier)) {
             compilationLog.addBadUsedSymbolMessage(declaredIdentifier);
         }
     }
