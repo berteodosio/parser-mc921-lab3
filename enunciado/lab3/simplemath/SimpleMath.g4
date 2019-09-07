@@ -2,32 +2,45 @@ grammar SimpleMath;
 
 root        : s;
 
-s           : s SEMICOLON s     # SSemicolonS
-            | var_declaration   # VarDeclaration
-            | func_declaration  # FuncDeclaration
-            | EOF               # EndOfFile
+s           : s SEMICOLON s
+            | var_declaration
+            | func_declaration
+            | EOF
             ;
 
-var_declaration : VAR ID EQ expression;
+var_declaration : VAR ID EQ num_expression;
 
-func_declaration : FUNC ID LPAREN func_param_list RPAREN expression;    // TODO: AFTER FUNC DECLARATION WRITE FUNC_BODY
+func_declaration : FUNC ID LPAREN func_param_list RPAREN func_body;
 
 func_param_list : ID (COMMA ID)*;
 
-expression  : expression SUB expression_t
-            | expression ADD expression_t
-            | expression_t
-            ;
+func_body : num_expression;
 
-expression_t : expression_t MUL expression_f
-             | expression_t DIV expression_f
-             | expression_f
-             ;
+func_invocation : ID LPAREN func_invocation_param_list RPAREN;
 
-expression_f : ID                           // TODO: expression_f also maybe a function invocation
-             | NUM
-             | LPAREN expression RPAREN
-             ;
+func_invocation_param_list : func_invocation_param
+                           | func_invocation_param (COMMA func_invocation_param)*
+                           ;
+
+func_invocation_param : ID
+                      | NUM
+                      ;
+
+num_expression  : num_expression SUB num_expression_t
+                | num_expression ADD num_expression_t
+                | num_expression_t
+                ;
+
+num_expression_t : num_expression_t MUL num_expression_f
+                 | num_expression_t DIV num_expression_f
+                 | num_expression_f
+                 ;
+
+num_expression_f : ID                           // TODO: expression_f also maybe a function invocation
+                 | NUM
+                 | LPAREN num_expression RPAREN
+                 | func_invocation
+                 ;
 
 
 WHITESPACE

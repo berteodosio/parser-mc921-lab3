@@ -16,33 +16,11 @@ public interface SimpleMathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRoot(SimpleMathParser.RootContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code VarDeclaration}
-	 * labeled alternative in {@link SimpleMathParser#s}.
+	 * Visit a parse tree produced by {@link SimpleMathParser#s}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVarDeclaration(SimpleMathParser.VarDeclarationContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code EndOfFile}
-	 * labeled alternative in {@link SimpleMathParser#s}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEndOfFile(SimpleMathParser.EndOfFileContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code SSemicolonS}
-	 * labeled alternative in {@link SimpleMathParser#s}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSSemicolonS(SimpleMathParser.SSemicolonSContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code FuncDeclaration}
-	 * labeled alternative in {@link SimpleMathParser#s}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFuncDeclaration(SimpleMathParser.FuncDeclarationContext ctx);
+	T visitS(SimpleMathParser.SContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SimpleMathParser#var_declaration}.
 	 * @param ctx the parse tree
@@ -62,21 +40,45 @@ public interface SimpleMathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunc_param_list(SimpleMathParser.Func_param_listContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SimpleMathParser#expression}.
+	 * Visit a parse tree produced by {@link SimpleMathParser#func_body}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(SimpleMathParser.ExpressionContext ctx);
+	T visitFunc_body(SimpleMathParser.Func_bodyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SimpleMathParser#expression_t}.
+	 * Visit a parse tree produced by {@link SimpleMathParser#func_invocation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression_t(SimpleMathParser.Expression_tContext ctx);
+	T visitFunc_invocation(SimpleMathParser.Func_invocationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SimpleMathParser#expression_f}.
+	 * Visit a parse tree produced by {@link SimpleMathParser#func_invocation_param_list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression_f(SimpleMathParser.Expression_fContext ctx);
+	T visitFunc_invocation_param_list(SimpleMathParser.Func_invocation_param_listContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleMathParser#func_invocation_param}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunc_invocation_param(SimpleMathParser.Func_invocation_paramContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleMathParser#num_expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNum_expression(SimpleMathParser.Num_expressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleMathParser#num_expression_t}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNum_expression_t(SimpleMathParser.Num_expression_tContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleMathParser#num_expression_f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNum_expression_f(SimpleMathParser.Num_expression_fContext ctx);
 }
