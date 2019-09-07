@@ -5,6 +5,10 @@
 *.tokens
 *.interp
 
+SimpleMathBaseVisitor.java
+SimpleMathParser.java
+SimpleMathVisitor.java
+
 
 
 
