@@ -1,5 +1,4 @@
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +14,7 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
     private DeclaredFunction currentDeclaredFunction = null;
 
-    public String getCompilationLog() {
+    String getCompilationLog() {
         return compilationLog.getFullLog();
     }
 
@@ -120,11 +119,8 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
     }
 
     private boolean isCurrentFunctionArgument(final String identifier) {
-        if (currentDeclaredFunction == null) {
-            return false;
-        }
-
-        return currentDeclaredFunction.argumentNames
+        return currentDeclaredFunction != null
+                && currentDeclaredFunction.argumentNames
                 .stream()
                 .anyMatch((it) -> it.equals(identifier));
     }
@@ -159,10 +155,6 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
     private boolean symbolAlreadyDeclared(final String variableName) {
         return declaredVariableIdentifiers.contains(variableName) || declaredFunctionSetContainsId(variableName);
-    }
-
-    private static void println(final Object object) {
-        System.out.println(object);
     }
 
     private static class DeclaredFunction {
