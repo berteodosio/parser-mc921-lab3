@@ -1,13 +1,17 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+import java.io.IOException;
+
 class MyParser {
+
+    private static final boolean IS_DEBUG = false;
 
     public static void main(String args[]) throws Exception {
 //        println("[MAIN] Starting");
 
         // create a CharStream that reads from standard input
-        final CharStream input = CharStreams.fromStream(System.in);
+        final CharStream input = getCharStream();
 
         // create a lexer that feeds off of input CharStream
         final SimpleMathLexer lexer = new SimpleMathLexer(input);
@@ -28,6 +32,13 @@ class MyParser {
         System.out.print(compilationLog);
 
 //        println("[MAIN] Finishing");
+    }
+
+    private static CharStream getCharStream() throws IOException {
+        if (IS_DEBUG) {
+            return CharStreams.fromString("func a(x) 2 + x * 5;");
+        }
+        return CharStreams.fromStream(System.in);
     }
 
     private static void println(final String string) {

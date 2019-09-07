@@ -1,5 +1,10 @@
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
@@ -8,15 +13,33 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
     private final CompilationLog compilationLog = new CompilationLog();
 
+    private DeclaredFunction currentDeclaredFunction = null;
+
     public String getCompilationLog() {
         return compilationLog.getFullLog();
     }
 
+    private void eraseCurrentDeclaredFunction() {
+        this.currentDeclaredFunction = null;
+    }
+
+    @Override
+    public Integer visitSSemicolonS(final SimpleMathParser.SSemicolonSContext ctx) {
+        eraseCurrentDeclaredFunction();
+        return super.visitSSemicolonS(ctx);
+    }
+
+    @Override
+    public Integer visitSEOF(final SimpleMathParser.SEOFContext ctx) {
+        eraseCurrentDeclaredFunction();
+        return super.visitSEOF(ctx);
+    }
+
     @Override
     public Integer visitSVarDeclaration(final SimpleMathParser.SVarDeclarationContext ctx) {
+        eraseCurrentDeclaredFunction();
         final String variableName = ctx.var_declaration().ID().getText();
         assertSymbolNotDeclared(variableName);
-
         declaredVariableIdentifiers.add(variableName);
         return super.visitSVarDeclaration(ctx);
     }
@@ -24,10 +47,18 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
     @Override
     public Integer visitSFuncDeclaration(final SimpleMathParser.SFuncDeclarationContext ctx) {
         final String functionName = ctx.func_declaration().ID().getText();
-        final int functionArgumentsCount = ctx.func_declaration().func_param_list().ID().size();
         assertSymbolNotDeclared(functionName);
-        declaredFunctionIdentifiers.add(new DeclaredFunction(functionName, functionArgumentsCount));
+        final DeclaredFunction declaredFunction = new DeclaredFunction(functionName, getDeclaredFunctionArgumentList(ctx));
+        this.currentDeclaredFunction = declaredFunction;
+        declaredFunctionIdentifiers.add(declaredFunction);
         return super.visitSFuncDeclaration(ctx);
+    }
+
+    private List<String> getDeclaredFunctionArgumentList(final SimpleMathParser.SFuncDeclarationContext ctx) {
+        return ctx.func_declaration().func_param_list().ID()
+                .stream()
+                .map(ParseTree::getText)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -51,13 +82,14 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
             return;
         }
 
-        if (declaredFunction.argumentsCount != invokedFunctionArgumentsCount) {
+        if (declaredFunction.argumentCount != invokedFunctionArgumentsCount) {
             compilationLog.addBadArgumentCount(invokedFunctionName);
         }
     }
 
     @Override
     public Integer visitDeclared_id(final SimpleMathParser.Declared_idContext ctx) {
+//        println("Declared id is " + ctx.getText() + " declared id parent is " + ctx.parent.getText());
         final String declaredIdentifier = ctx.ID().getText();
         assertDeclaredIdentifier(declaredIdentifier);
         return super.visitDeclared_id(ctx);
@@ -71,6 +103,12 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
     private void assertDeclaredIdentifier(final String declaredIdentifier) {
         if (!declaredVariableIdentifiers.contains(declaredIdentifier) && !declaredFunctionSetContainsId(declaredIdentifier)) {
+//            println("id undeclared " + declaredIdentifier);
+            // FIXME problem here: local arguments are not being recognized, getting symbol undeclared
+            if (isCurrentFunctionArgument(declaredIdentifier)) {
+                return;
+            }
+
             compilationLog.addSymbolUndeclaredMessage(declaredIdentifier);
             return;
         }
@@ -78,6 +116,16 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
         if (declaredFunctionSetContainsId(declaredIdentifier)) {
             compilationLog.addBadUsedSymbolMessage(declaredIdentifier);
         }
+    }
+
+    private boolean isCurrentFunctionArgument(final String identifier) {
+        if (currentDeclaredFunction == null) {
+            return false;
+        }
+
+        return currentDeclaredFunction.argumentNames
+                .stream()
+                .anyMatch((it) -> it.equals(identifier));
     }
 
     private void assertFunctionDeclaredBeforeInvocation(final String invokedFunctionName) {
@@ -108,11 +156,13 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
     private static class DeclaredFunction {
 
         private final String name;
-        private final int argumentsCount;
+        private final int argumentCount;
+        private final List<String> argumentNames;
 
-        private DeclaredFunction(final String name, final int argumentsCount) {
+        private DeclaredFunction(final String name, final List<String> argumentNames) {
             this.name = name;
-            this.argumentsCount = argumentsCount;
+            this.argumentCount = argumentNames.size();
+            this.argumentNames = argumentNames;
         }
 
     }
@@ -141,7 +191,7 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
             addMessage(CompilerErrorMessage.BAD_ARGUMENT_COUNT, invokedFunctionName);
         }
 
-        public String getFullLog() {
+        String getFullLog() {
             return compilationLogMessage;
         }
 
