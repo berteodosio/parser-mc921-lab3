@@ -2,10 +2,10 @@ grammar SimpleMath;
 
 root : s;
 
-s : s SEMICOLON s
-  | var_declaration
-  | func_declaration
-  | EOF
+s : s SEMICOLON s           #SSemicolonS
+  | var_declaration         #SVarDeclaration
+  | func_declaration        #SFuncDeclaration
+  | EOF                     #SEOF
   ;
 
 var_declaration : VAR ID EQ expression;
@@ -34,11 +34,13 @@ expression_t : expression_t MUL expression_f
              | expression_f
              ;
 
-expression_f : ID
+expression_f : declared_id
              | NUM
              | LPAREN expression RPAREN
              | func_invocation
              ;
+
+declared_id : ID;
 
 
 WHITESPACE

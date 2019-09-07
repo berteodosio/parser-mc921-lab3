@@ -1,5 +1,6 @@
 #!/bin/bash
-set -x
+#set -x
+
 #compiling the Sum.g4 in java files
 java -jar "antlr-4.7.2-complete.jar" -no-listener -visitor SimpleMath.g4
 #exporting the class path
@@ -56,16 +57,16 @@ var d = (C(23, a) / B(32, a));"
 EXPRESSION_8="func _le_2func(a, b, c, d) ((a + b - c) * d);
 var _23 = _le_2func(1,2, 3);"
 
-EXPRESSION_IN_USE=${EXPRESSION_8}
+EXPRESSION_IN_USE=${EXPRESSION_2}
 
 #feeding a string and reading the tokens
 #echo "${EXPRESSION_IN_USE}" | java org.antlr.v4.gui.TestRig SimpleMath root -tokens
 
 # #feeding a string and reading tree in list style
-# echo "var a = 0;" | java org.antlr.v4.gui.TestRig SimpleMath root -tree
+#echo "var a = 0;" | java org.antlr.v4.gui.TestRig SimpleMath root -tree
 
 # #feeding a string and printing a graphical tree
- echo "${EXPRESSION_IN_USE}" | java org.antlr.v4.gui.TestRig SimpleMath root -gui
+#echo "${EXPRESSION_IN_USE}" | java org.antlr.v4.gui.TestRig SimpleMath root -gui
 
 #execute the implemented visitor
 echo "${EXPRESSION_IN_USE}" | java MyParser
