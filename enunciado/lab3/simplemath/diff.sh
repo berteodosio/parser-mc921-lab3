@@ -8,3 +8,6 @@ diff result5.txt results/result5.txt
 diff result6.txt results/result6.txt
 diff result7.txt results/result7.txt
 diff result8.txt results/result8.txt
+
+rm *.txt
+rm *.class
