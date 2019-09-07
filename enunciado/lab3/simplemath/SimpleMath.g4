@@ -1,20 +1,20 @@
 grammar SimpleMath;
 
-root        : s;
+root : s;
 
-s           : s SEMICOLON s
-            | var_declaration
-            | func_declaration
-            | EOF
-            ;
+s : s SEMICOLON s
+  | var_declaration
+  | func_declaration
+  | EOF
+  ;
 
-var_declaration : VAR ID EQ num_expression;
+var_declaration : VAR ID EQ expression;
 
 func_declaration : FUNC ID LPAREN func_param_list RPAREN func_body;
 
 func_param_list : ID (COMMA ID)*;
 
-func_body : num_expression;
+func_body : expression;
 
 func_invocation : ID LPAREN func_invocation_param_list RPAREN;
 
@@ -26,21 +26,21 @@ func_invocation_param : ID
                       | NUM
                       ;
 
-num_expression  : num_expression SUB num_expression_t
-                | num_expression ADD num_expression_t
-                | num_expression_t
-                ;
+expression  : expression SUB expression_t
+            | expression ADD expression_t
+            | expression_t
+            ;
 
-num_expression_t : num_expression_t MUL num_expression_f
-                 | num_expression_t DIV num_expression_f
-                 | num_expression_f
-                 ;
+expression_t : expression_t MUL expression_f
+             | expression_t DIV expression_f
+             | expression_f
+             ;
 
-num_expression_f : ID
-                 | NUM
-                 | LPAREN num_expression RPAREN
-                 | func_invocation
-                 ;
+expression_f : ID
+             | NUM
+             | LPAREN expression RPAREN
+             | func_invocation
+             ;
 
 
 WHITESPACE
