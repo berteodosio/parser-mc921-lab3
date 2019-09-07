@@ -1,4 +1,3 @@
-
 public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
     @Override
     public Integer visitRoot(final SimpleMathParser.RootContext ctx) {

@@ -69,3 +69,9 @@ EXPRESSION_IN_USE=${EXPRESSION_8}
 
 #execute the implemented visitor
 echo "${EXPRESSION_IN_USE}" | java MyParser
+
+clear() {
+    rm *.class
+}
+
+clear
