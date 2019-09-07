@@ -89,7 +89,6 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
     @Override
     public Integer visitDeclared_id(final SimpleMathParser.Declared_idContext ctx) {
-//        println("Declared id is " + ctx.getText() + " declared id parent is " + ctx.parent.getText());
         final String declaredIdentifier = ctx.ID().getText();
         assertDeclaredIdentifier(declaredIdentifier);
         return super.visitDeclared_id(ctx);
@@ -103,8 +102,6 @@ public class MyVisitor extends SimpleMathBaseVisitor<Integer> {
 
     private void assertDeclaredIdentifier(final String declaredIdentifier) {
         if (!declaredVariableIdentifiers.contains(declaredIdentifier) && !declaredFunctionSetContainsId(declaredIdentifier)) {
-//            println("id undeclared " + declaredIdentifier);
-            // FIXME problem here: local arguments are not being recognized, getting symbol undeclared
             if (isCurrentFunctionArgument(declaredIdentifier)) {
                 return;
             }
